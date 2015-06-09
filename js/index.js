@@ -13,7 +13,7 @@ var AppsFlyer = Class(function () {
   this.setUserId = function (params) {
     // Allowed params
     // uid : custom user id
-    pluginSend('setUserIds', params);
+    pluginSend('setUserId', params);
   };
 
   this.trackPurchase = function (receipt, productId, revenue,
