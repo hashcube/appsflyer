@@ -55,7 +55,7 @@
   }
 }
 
-- (void) setUserIds:(NSDictionary *)jsonObject {
+- (void) setUserId:(NSDictionary *)jsonObject {
   @try {
     if([jsonObject objectForKey:@"uid"]) {
       NSString *uid = [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"uid"]];

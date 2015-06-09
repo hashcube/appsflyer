@@ -10,10 +10,9 @@ var AppsFlyer = Class(function () {
     logger.log('{AppsFlyer} Registering for events on startup');
   };
 
-  this.setUserIds = function (params) {
+  this.setUserId = function (params) {
     // Allowed params
     // uid : custom user id
-    // fb_id: facebook user ID
     pluginSend('setUserIds', params);
   };
 
