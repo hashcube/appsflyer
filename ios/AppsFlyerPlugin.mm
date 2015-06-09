@@ -37,10 +37,10 @@
       [AppsFlyerTracker sharedTracker].appsFlyerDevKey = APPS_FLYER_DEV_KEY;
 
       // FOR DEBUG ONLY: TURN THIS ON TO SEE DEBUG MESSAGES
-      [AppsFlyerTracker sharedTracker].isDebug = YES;
+      //[AppsFlyerTracker sharedTracker].isDebug = YES;
 
       // FOR DEBUG ONLY: USE SANDBOX MODE TO TRACK PURCHASES
-      [AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = YES;
+      //[AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = YES;
 
       //checking if didBecameActive was called before this
       if(self.becameActive){
