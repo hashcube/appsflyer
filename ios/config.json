@@ -1,0 +1,12 @@
+{
+  "code": [
+    "AppsFlyerPlugin.h",
+    "AppsFlyerPlugin.mm",
+    "AppsFlyerTracker.h"
+  ],
+  "frameworks": [
+    "AdSupport",
+    "iAd",
+    "libAppsFlyerLib.a"
+  ]
+}
