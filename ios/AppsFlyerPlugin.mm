@@ -16,13 +16,10 @@
 
 // The plugin must call super init.
 - (id) init {
-  self = [super init];
-  if (!self) {
-    return nil;
+  if (self = [super init]) {
+    self.initDone = NO;
+    self.becameActive = NO;
   }
-
-  self.initDone = NO;
-  self.becameActive = NO;
   return self;
 }
 
@@ -76,12 +73,12 @@
                      eventNameIfFailed:@"in‐app‐purchase‐failed"
                              withValue:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]
                            withProduct:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]]
-                                price:[[NSDecimalNumber alloc ]initWithString:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]]
-                                 currency:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]]
-                               success:^(NSDictionary *response){
+                                 price:[[NSDecimalNumber alloc ]initWithString:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]]
+                              currency:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]]
+                               success:^(NSDictionary *response) {
                                  NSLog(@"{AppsFlyer} track purchase success resonse: %@", response);
                                }
-                               failure:^(NSError *error, id response){
+                               failure:^(NSError *error, id response) {
                                  NSLog(@"{AppsFlyer} track purchase failure response: %@", response);
                                }];
 }
