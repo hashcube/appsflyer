@@ -29,12 +29,13 @@ var AppsFlyer = Class(function () {
     pluginSend('trackPurchase', params);
   };
 
-  this.trackEvent = function (event_name, values) {
+  //refer to AppsFlyerTracker.h for some predefined keys
+  this.trackEventWithValue = function (event_name, value) {
   var params = {
       event_name: event_name,
-      values: values
+      value: value
     };
-    pluginSend('trackEvent', params);
+    pluginSend('trackEventWithValue', params);
   };
 
 });

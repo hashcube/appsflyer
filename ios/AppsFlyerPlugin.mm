@@ -23,7 +23,8 @@
   return self;
 }
 
-- (void) initializeWithManifest:(NSDictionary *)manifest appDelegate:(TeaLeafAppDelegate *)appDelegate {
+- (void) initializeWithManifest:(NSDictionary *)manifest
+                    appDelegate:(TeaLeafAppDelegate *)appDelegate {
   @try {
     NSDictionary *ios = [manifest valueForKey:@"ios"];
     NSString * const APP_ID = [ios valueForKey:@"appleID"];
@@ -44,7 +45,7 @@
         [[AppsFlyerTracker sharedTracker] trackAppLaunch];
         [AppsFlyerTracker sharedTracker].delegate = self;
       }
-      self.initDone = YES; 
+      self.initDone = YES;
     }
   }
   @catch (NSException *exception) {
@@ -69,23 +70,29 @@
 //  NSString *receiptString = [jsonObject valueForKey:@"receipt"];
 //  NSData *data = [receiptString dataUsingEncoding:NSUTF8StringEncoding];
 
-  [[AppsFlyerTracker sharedTracker]validateAndTrackInAppPurchase:@"in‐app‐purchase‐success"
-                     eventNameIfFailed:@"in‐app‐purchase‐failed"
-                             withValue:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]
-                           withProduct:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]]
-                                 price:[[NSDecimalNumber alloc ]initWithString:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]]
-                              currency:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]]
-                               success:^(NSDictionary *response) {
-                                 NSLog(@"{AppsFlyer} track purchase success resonse: %@", response);
-                               }
-                               failure:^(NSError *error, id response) {
-                                 NSLog(@"{AppsFlyer} track purchase failure response: %@", response);
-                               }];
+//  [[AppsFlyerTracker sharedTracker]validateAndTrackInAppPurchase:@"in‐app‐purchase‐success"
+//                     eventNameIfFailed:@"in‐app‐purchase‐failed"
+//                             withValue:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]
+//                           withProduct:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]]
+//                                 price:[[NSDecimalNumber alloc ]initWithString:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]]
+//                              currency:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]]
+//                               success:^(NSDictionary *response) {
+//                                 NSLog(@"{AppsFlyer} track purchase success resonse: %@", response);
+//                               }
+//                               failure:^(NSError *error, id response) {
+//                                 NSLog(@"{AppsFlyer} track purchase failure response: %@", response);
+//                               }];
+  [[AppsFlyerTracker sharedTracker] trackEvent: @"in-app-purchase" withValues:@{
+                             AFEventParamPrice: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]],
+                         AFEventParamContentId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]],
+                          AFEventParamCurrency: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]],
+                          AFEventParamQuantity: @1,
+                         AFEventParamReceiptId: receiptString }];
 }
 
-- (void) trackEvent:(NSDictionary *)jsonObject {
+- (void) trackEventWithValue:(NSDictionary *)jsonObject {
   [[AppsFlyerTracker sharedTracker]trackEvent:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"event_name"]]
-                                   withValues:(NSDictionary *)[jsonObject valueForKey:@"values"]];
+                                    withValue:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"value"]]];
 }
 
 - (void) applicationDidBecomeActive:(UIApplication *)app {
