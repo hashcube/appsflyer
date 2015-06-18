@@ -31,7 +31,7 @@ var AppsFlyer = Class(function () {
 
   //refer to AppsFlyerTracker.h for some predefined keys
   this.trackEventWithValue = function (event_name, value) {
-  var params = {
+    var params = {
       event_name: event_name,
       value: value
     };
