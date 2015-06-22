@@ -3,6 +3,8 @@ package com.tealeaf.plugin.plugins;
 import com.tealeaf.logger;
 import com.tealeaf.plugin.IPlugin;
 import java.io.*;
+import java.util.Map;
+import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,8 +47,6 @@ public class AppsFlyerPlugin implements IPlugin {
 			android.util.Log.d("EXCEPTION", "" + e.getMessage());
 		}
 
-		logger.log("{appsFlyer} Initializing from manifest with DevKey=", devKey);
-
 		AppsFlyerLib.setAppsFlyerKey(devKey);
 
 		AppsFlyerLib.sendTracking(mContext);
@@ -65,18 +65,22 @@ public class AppsFlyerPlugin implements IPlugin {
         public void trackPurchase(String json) {
            try {
              JSONObject data = new JSONObject(json);
-             String revenue = data.getString("revenue");
+             String receiptId = data.getString("receipt");
+             String productId = data.getString("productId");
+             double revenue = data.getDouble("revenue");
              String currency = data.getString("currency");
-             AppsFlyerLib.setCurrencyCode(currency);
-             AppsFlyerLib.sendTrackingWithEvent(mContext, "af_purchase", revenue);
-             logger.log("{{appsflyer}} Sent payment events", revenue, currency);
+             Map<String,Object> event = new HashMap<String,Object>();
+             event.put("revenue", revenue);
+             event.put("productId", productId);
+             event.put("receipt", receiptId);
+             event.put("currency", currency);
+	     AppsFlyerLib.trackEvent(mContext, "af_purchase", event);
            } catch (JSONException ex) {
              ex.printStackTrace();
            }
         }
  
         public void trackEventWithValue(String json) {
-           logger.log("{{appsflyer}}custom event");
            try {
              JSONObject data = new JSONObject(json);
              String event_name = data.getString("event_name");
