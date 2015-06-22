@@ -57,7 +57,6 @@ public class AppsFlyerPlugin implements IPlugin {
              JSONObject data = new JSONObject(json);
              String userId = data.getString("hc_uid");
              AppsFlyerLib.setAppUserId(userId);
-             String id = AppsFlyerLib.getAppUserId();
            } catch (JSONException ex) {
              ex.printStackTrace();
            }
@@ -69,7 +68,7 @@ public class AppsFlyerPlugin implements IPlugin {
              String revenue = data.getString("revenue");
              String currency = data.getString("currency");
              AppsFlyerLib.setCurrencyCode(currency);
-             AppsFlyerLib.sendTrackingWithEvent(mContext, "purchase", revenue);
+             AppsFlyerLib.sendTrackingWithEvent(mContext, "af_purchase", revenue);
              logger.log("{{appsflyer}} Sent payment events", revenue, currency);
            } catch (JSONException ex) {
              ex.printStackTrace();
