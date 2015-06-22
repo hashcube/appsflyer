@@ -74,7 +74,7 @@ public class AppsFlyerPlugin implements IPlugin {
              event.put("productId", productId);
              event.put("receipt", receiptId);
              event.put("currency", currency);
-	     AppsFlyerLib.trackEvent(mContext, "af_purchase", event);
+             AppsFlyerLib.trackEvent(mContext, "af_purchase", event);
            } catch (JSONException ex) {
              ex.printStackTrace();
            }
