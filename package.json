@@ -6,7 +6,8 @@
       "appsflyer": "js"
     },
     "extensions": {
-      "ios": "ios"
+      "ios": "ios",
+      "android": "android"
     }
   }
 }
