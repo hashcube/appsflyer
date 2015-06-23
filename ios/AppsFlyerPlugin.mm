@@ -71,7 +71,6 @@
                              AFEventParamPrice: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]],
                          AFEventParamContentId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]],
                           AFEventParamCurrency: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]],
-                          AFEventParamQuantity: @1,
                          AFEventParamReceiptId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"receipt"]] }];
 }
 
@@ -90,24 +89,6 @@
 
 - (void) handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication {
   [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotaion:nil];
-}
-
-#pragma AppsFlyerTrackerDelegate methods
-- (void) onConversionDataReceived:(NSDictionary*) installData{
-    id status = [installData objectForKey:@"af_status"];
-    if([status isEqualToString:@"Non-organic"]) {
-        id sourceID = [installData objectForKey:@"media_source"];
-        id campaign = [installData objectForKey:@"campaign"];
-        NSLog(@"This is a none organic install.");
-        NSLog(@"Media source: %@",sourceID);
-        NSLog(@"Campaign: %@",campaign);
-    } else if([status isEqualToString:@"Organic"]) {
-        NSLog(@"This is an organic install.");
-    }
-}
-
-- (void) onConversionDataRequestFailure:(NSError *)error{
-    NSLog(@"Failed to get data from AppsFlyer's server: %@",[error localizedDescription]);
 }
 
 @end
