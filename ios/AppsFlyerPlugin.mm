@@ -67,27 +67,12 @@
 
 
 - (void) trackPurchase:(NSDictionary *)jsonObject {
-//  NSString *receiptString = [jsonObject valueForKey:@"receipt"];
-//  NSData *data = [receiptString dataUsingEncoding:NSUTF8StringEncoding];
-
-//  [[AppsFlyerTracker sharedTracker]validateAndTrackInAppPurchase:@"in‐app‐purchase‐success"
-//                     eventNameIfFailed:@"in‐app‐purchase‐failed"
-//                             withValue:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]
-//                           withProduct:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]]
-//                                 price:[[NSDecimalNumber alloc ]initWithString:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]]
-//                              currency:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]]
-//                               success:^(NSDictionary *response) {
-//                                 NSLog(@"{AppsFlyer} track purchase success resonse: %@", response);
-//                               }
-//                               failure:^(NSError *error, id response) {
-//                                 NSLog(@"{AppsFlyer} track purchase failure response: %@", response);
-//                               }];
-  [[AppsFlyerTracker sharedTracker] trackEvent: @"in-app-purchase" withValues:@{
+  [[AppsFlyerTracker sharedTracker] trackEvent: AFEventPurchase withValues:@{
                              AFEventParamPrice: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]],
                          AFEventParamContentId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]],
                           AFEventParamCurrency: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]],
                           AFEventParamQuantity: @1,
-                         AFEventParamReceiptId: receiptString }];
+                         AFEventParamReceiptId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"receipt"]] }];
 }
 
 - (void) trackEventWithValue:(NSDictionary *)jsonObject {

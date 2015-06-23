@@ -10,9 +10,10 @@ var AppsFlyer = Class(function () {
     logger.log('{AppsFlyer} Registering for events on startup');
   };
 
-  this.setUserId = function (params) {
+  this.setUserId = function (uid) {
     // Allowed params
     // uid : custom user id
+    var params = { uid: uid };
     pluginSend('setUserId', params);
   };
 
