@@ -1,0 +1,13 @@
+{
+  "name": "appsflyer",
+  "version": "2.5.3",
+  "devkit": {
+    "clientPaths": {
+      "appsflyer": "js"
+    },
+    "extensions": {
+      "ios": "ios",
+      "android": "android"
+    }
+  }
+}
