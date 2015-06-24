@@ -7,27 +7,25 @@ function pluginSend(evt, params) {
 var AppsFlyer = Class(function () {
 
   this.init = function () {
-    logger.log('{AppsFlyer} Registering for events on startup');
   };
 
   this.setUserId = function (uid) {
     // Allowed params
     // uid : custom user id
-    var params = { uid: uid };
-    pluginSend('setUserId', params);
+    pluginSend('setUserId', {
+      uid: uid
+    });
   };
 
   this.trackPurchase = function (receipt, productId, revenue,
     currency, transaction_id) {
-    var params = {
+    pluginSend('trackPurchase', {
       receipt: receipt,
       productId: productId,
       revenue: revenue,
       currency: currency,
       transaction_id: transaction_id
-    };
-
-    pluginSend('trackPurchase', params);
+    });
   };
 
   //refer to AppsFlyerTracker.h for some predefined keys
