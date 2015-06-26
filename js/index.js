@@ -18,13 +18,12 @@ var AppsFlyer = Class(function () {
   };
 
   this.trackPurchase = function (receipt, productId, revenue,
-    currency, transaction_id) {
+    currency) {
     pluginSend('trackPurchase', {
       receipt: receipt,
       productId: productId,
       revenue: revenue,
-      currency: currency,
-      transaction_id: transaction_id
+      currency: currency
     });
   };
 
