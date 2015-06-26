@@ -68,7 +68,7 @@
 
 - (void) trackPurchase:(NSDictionary *)jsonObject {
   [[AppsFlyerTracker sharedTracker] trackEvent: AFEventPurchase withValues:@{
-                             AFEventParamPrice: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]],
+                           AFEventParamRevenue: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]],
                          AFEventParamContentId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]],
                           AFEventParamCurrency: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]],
                          AFEventParamReceiptId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"receipt"]] }];
