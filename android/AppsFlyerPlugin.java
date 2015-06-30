@@ -55,7 +55,7 @@ public class AppsFlyerPlugin implements IPlugin {
 	public void setUserId(String json) {
                 try {
                         JSONObject data = new JSONObject(json);
-                        String userId = data.getString("hc_uid");
+                        String userId = data.getString("uid");
                         AppsFlyerLib.setAppUserId(userId);
                 } catch (JSONException ex) {
                         ex.printStackTrace();
