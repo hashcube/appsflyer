@@ -9,7 +9,7 @@
 <!--START_PLUGINS_APPLICATION-->
         <!--AppsFlyer-->
         <meta-data android:name="APPSFLYER_DEV_KEY" android:value="" />
-        <receiver android:name="com.appsflyer.AppsFlyerLib" android:exported="true">
+        <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
                 <intent-filter>
                         <action android:name="com.android.vending.INSTALL_REFERRER" />
                 </intent-filter>
