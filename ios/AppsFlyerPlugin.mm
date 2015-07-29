@@ -49,7 +49,7 @@
     }
   }
   @catch (NSException *exception) {
-    NSLog(@"{AppsFlyer} Exception while initializing: %@", exception);
+    NSLOG(@"{AppsFlyer} Exception while initializing: %@", exception);
   }
 }
 
@@ -61,7 +61,7 @@
     }
   }
   @catch (NSException *exception) {
-    NSLog(@"{AppsFlyer} Exception while setting user id: %@", exception);
+    NSLOG(@"{AppsFlyer} Exception while setting user id: %@", exception);
   }
 }
 
