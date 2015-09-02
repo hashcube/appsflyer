@@ -48,48 +48,47 @@ public class AppsFlyerPlugin implements IPlugin {
 		}
 
 		AppsFlyerLib.setAppsFlyerKey(devKey);
-
-		AppsFlyerLib.sendTracking(mContext);
 	}
 
 	public void setUserId(String json) {
-                try {
-                        JSONObject data = new JSONObject(json);
-                        String userId = data.getString("uid");
-                        AppsFlyerLib.setAppUserId(userId);
-                } catch (JSONException ex) {
-                        ex.printStackTrace();
-                }
+		try {
+			JSONObject data = new JSONObject(json);
+			String userId = data.getString("uid");
+			AppsFlyerLib.setAppUserId(userId);
+		} catch (JSONException ex) {
+			ex.printStackTrace();
+		}
+		AppsFlyerLib.sendTracking(mContext);
 	}
-       
-        public void trackPurchase(String json) {
-                try {
-                        JSONObject data = new JSONObject(json);
-                        String receiptId = data.getString("receipt");
-                        String productId = data.getString("productId");
-                        double revenue = data.getDouble("revenue");
-                        String currency = data.getString("currency");
-                        Map<String,Object> event = new HashMap<String,Object>();
-                        event.put("revenue", revenue);
-                        event.put("productId", productId);
-                        event.put("receipt", receiptId);
-                        event.put("currency", currency);
-                        AppsFlyerLib.trackEvent(mContext, "af_purchase", event);
-                } catch (JSONException ex) {
-                        ex.printStackTrace();
-                }
-        }
- 
-        public void trackEventWithValue(String json) {
-                try {
-                        JSONObject data = new JSONObject(json);
-                        String event_name = data.getString("event_name");
-                        String value = data.getString("value");
-                        AppsFlyerLib.sendTrackingWithEvent(mContext, event_name, value);
-                } catch (JSONException ex) {
-                        ex.printStackTrace();
-                }
-        }
+
+	public void trackPurchase(String json) {
+		try {
+			JSONObject data = new JSONObject(json);
+			String receiptId = data.getString("receipt");
+			String productId = data.getString("productId");
+			double revenue = data.getDouble("revenue");
+			String currency = data.getString("currency");
+			Map<String,Object> event = new HashMap<String,Object>();
+			event.put("revenue", revenue);
+			event.put("productId", productId);
+			event.put("receipt", receiptId);
+			event.put("currency", currency);
+			AppsFlyerLib.trackEvent(mContext, "af_purchase", event);
+		} catch (JSONException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void trackEventWithValue(String json) {
+		try {
+			JSONObject data = new JSONObject(json);
+			String event_name = data.getString("event_name");
+			String value = data.getString("value");
+			AppsFlyerLib.sendTrackingWithEvent(mContext, event_name, value);
+		} catch (JSONException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public void onResume() {
 	}
