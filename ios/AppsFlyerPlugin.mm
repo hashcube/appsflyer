@@ -1,12 +1,5 @@
 #import "AppsFlyerPlugin.h"
 
-@interface AppsFlyerPlugin()
-
-@property (nonatomic, assign) BOOL initDone;
-@property (nonatomic, assign) BOOL becameActive;
-
-@end
-
 @implementation AppsFlyerPlugin
 
 // The plugin must call super dealloc.
@@ -16,11 +9,11 @@
 
 // The plugin must call super init.
 - (id) init {
-  if (self = [super init]) {
-    self.initDone = NO;
-    self.becameActive = NO;
-  }
-  return self;
+   self = [super init];
+   if (!self) {
+       return nil;
+   }
+   return self;
 }
 
 - (void) initializeWithManifest:(NSDictionary *)manifest
@@ -40,12 +33,6 @@
       // FOR DEBUG ONLY: USE SANDBOX MODE TO TRACK PURCHASES
       // [AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = YES;
 
-      //checking if didBecameActive was called before this
-      if(self.becameActive){
-        [[AppsFlyerTracker sharedTracker] trackAppLaunch];
-        [AppsFlyerTracker sharedTracker].delegate = self;
-      }
-      self.initDone = YES;
     }
   }
   @catch (NSException *exception) {
@@ -58,6 +45,8 @@
     if([jsonObject objectForKey:@"uid"]) {
       NSString *uid = [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"uid"]];
       [AppsFlyerTracker sharedTracker].customerUserID = uid;
+      [[AppsFlyerTracker sharedTracker] trackAppLaunch];
+      [AppsFlyerTracker sharedTracker].delegate = self;
     }
   }
   @catch (NSException *exception) {
@@ -77,14 +66,6 @@
 - (void) trackEventWithValue:(NSDictionary *)jsonObject {
   [[AppsFlyerTracker sharedTracker]trackEvent:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"event_name"]]
                                     withValue:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"value"]]];
-}
-
-- (void) applicationDidBecomeActive:(UIApplication *)app {
-  if(self.initDone) {
-    [[AppsFlyerTracker sharedTracker] trackAppLaunch];
-    [AppsFlyerTracker sharedTracker].delegate = self;
-  }
-  self.becameActive = YES;
 }
 
 - (void) handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication {
