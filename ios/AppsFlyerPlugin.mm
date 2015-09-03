@@ -9,8 +9,11 @@
 
 // The plugin must call super init.
 - (id) init {
-  self = [super init]
-  return self;
+   self = [super init];
+   if (!self) {
+       return nil;
+   }
+   return self;
 }
 
 - (void) initializeWithManifest:(NSDictionary *)manifest
