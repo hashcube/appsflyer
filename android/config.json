@@ -5,7 +5,7 @@
     "libraries": [
     ],
     "jars": [
-        "AF-Android-SDK-v2.3.1.17.jar"
+        "AF-Android-SDK-v2.3.1.18.jar"
     ],
     "injectionXML": "manifest.xml",
     "injectionXSL": "manifest.xsl"
