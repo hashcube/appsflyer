@@ -1,13 +1,16 @@
-/* global Class, exports:true, NATIVE, logger */
+/* global Class, exports:true, NATIVE */
 
 function pluginSend(evt, params) {
-  NATIVE.plugins.sendEvent('AppsFlyerPlugin', evt, JSON.stringify(params || {}));
+  'use strict';
+
+  NATIVE.plugins.sendEvent('AppsFlyerPlugin', evt,
+    JSON.stringify(params || {}));
 }
 
 var AppsFlyer = Class(function () {
+  'use strict';
 
-  this.init = function () {
-  };
+  this.init = function () {};
 
   this.setUserId = function (uid) {
     // Allowed params
@@ -17,11 +20,12 @@ var AppsFlyer = Class(function () {
     });
   };
 
-  this.trackPurchase = function (receipt, productId, revenue,
-    currency) {
+  this.trackPurchase = function (receipt, item, revenue,
+    currency, transaction_id) {
     pluginSend('trackPurchase', {
       receipt: receipt,
-      productId: productId,
+      transactionId: transaction_id,
+      productId: item,
       revenue: revenue,
       currency: currency
     });

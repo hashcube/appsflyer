@@ -56,11 +56,17 @@
 
 
 - (void) trackPurchase:(NSDictionary *)jsonObject {
-  [[AppsFlyerTracker sharedTracker] trackEvent: AFEventPurchase withValues:@{
-                           AFEventParamRevenue: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]],
-                         AFEventParamContentId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]],
-                          AFEventParamCurrency: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]],
-                         AFEventParamReceiptId: [NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"receipt"]] }];
+  [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"productId"]]
+														  price:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"revenue"]]
+													   currency:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"currency"]]
+												  transactionId:[NSString stringWithFormat:@"%@",[jsonObject valueForKey:@"transactionId"]]
+										   additionalParameters:nil
+														success:^(NSDictionary *response) {
+															NSLOG(@"{appsflyer} validation success %@", response);
+														}
+														failure:^(NSError *error, id reponse) {
+															NSLOG(@"{appsflyer} validation failure %@", error);
+														}];
 }
 
 - (void) trackEventWithValue:(NSDictionary *)jsonObject {
