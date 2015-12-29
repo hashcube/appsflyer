@@ -6,6 +6,10 @@
 	<xsl:output indent="yes" />
 	<xsl:template match="comment()" />
 
+	<xsl:template match="meta-data[@android:name='CHANNEL']">
+		<meta-data android:name="CHANNEL" android:value="amazon"/>
+	</xsl:template>
+
 	<xsl:template match="meta-data[@android:name='APPSFLYER_DEV_KEY']">
 		<meta-data android:name="APPSFLYER_DEV_KEY" android:value="{$appsFlyerDevKey}"/>
 	</xsl:template>

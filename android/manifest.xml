@@ -9,6 +9,7 @@
 <!--END_PLUGINS_ACTIVITY-->
 <!--START_PLUGINS_APPLICATION-->
         <!--AppsFlyer-->
+        <meta-data android:name="CHANNEL" android:value="amazon" />
         <meta-data android:name="APPSFLYER_DEV_KEY" android:value="" />
         <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
                 <intent-filter>
