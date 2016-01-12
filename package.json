@@ -1,6 +1,6 @@
 {
   "name": "appsflyer",
-  "version": "2.5.3",
+  "version": "3.3.0",
   "devkit": {
     "clientPaths": {
       "appsflyer": "js"
