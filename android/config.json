@@ -3,6 +3,7 @@
         "AppsFlyerPlugin.java"
     ],
     "libraries": [
+        "google_play_services_lib"
     ],
     "jars": [
         "AF-Android-SDK-v2.3.1.18.jar"
