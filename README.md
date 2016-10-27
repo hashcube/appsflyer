@@ -4,12 +4,9 @@ Please get the AppsFlyer dev key from the dashboard.
 
 ## Usage
 
-Include this module as a dependency in your game's manifest file.
-
+Run
 ```
-"dependencies": {
-    "appsflyer": "https://github.com/hashcube/appsflyer.git#master"
-}
+devkit install https://github.com/hashcube/appsflyer.git
 ```
 
 Then add `appsFlyerDevKey` to iOS or android section.
